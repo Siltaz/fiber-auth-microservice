@@ -13,12 +13,18 @@ func Protected() func(*fiber.Ctx) error {
 	})
 }
 
-func jwtError(c *fiber.Ctx, err error) error {
+func jwtError(ctx *fiber.Ctx, err error) error {
 	if err.Error() == "Missing or malformed JWT" {
-		c.Status(fiber.StatusBadRequest)
-		return c.JSON(fiber.Map{"error": "Missing or malformed token"})
+		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Missing Token",
+			"data":    nil,
+		})
 	} else {
-		c.Status(fiber.StatusUnauthorized)
-		return c.JSON(fiber.Map{"error": "Invalid or expired token"})
+		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Invalid Token",
+			"data":    nil,
+		})
 	}
 }

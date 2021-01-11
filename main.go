@@ -30,14 +30,15 @@ func main() {
 
 	app.Use(logger.New())
 	app.Use(limiter.New(limiter.Config{
-		Expiration: 30 * time.Second,
+		Max:        20,
+		Expiration: 20 * time.Second,
 	}))
 	app.Use(recover.New())
 	app.Use(compress.New(compress.Config{
 		Level: compress.LevelBestSpeed,
 	}))
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://api.dealmybook.com",
+		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept",
 		AllowMethods: "POST",
 	}))
