@@ -1,9 +1,9 @@
 # 🔑 Auth Microservice in [Go-Fiber](https://github.com/gofiber/fiber)
 
 ### Overview
-- MongoDB
-- JWT
-- Input Validation
+- [MongoDB](https://github.com/mongodb/mongo-go-driver)
+- [JWT](https://github.com/gofiber/jwt)
+- [ozzo-Validation](https://github.com/go-ozzo/ozzo-validation)
 
 ### Endpoints
 
