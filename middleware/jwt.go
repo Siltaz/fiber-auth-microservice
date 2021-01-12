@@ -1,14 +1,14 @@
 package middleware
 
 import (
-	"dmb-auth-service/global"
+	"dmb-auth-service/config"
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v2"
 )
 
-func Protected() func(*fiber.Ctx) error {
+func ProtectedRoute() func(*fiber.Ctx) error {
 	return jwtware.New(jwtware.Config{
-		SigningKey:   []byte(global.Config("JWT_SECRET")),
+		SigningKey:   []byte(config.Config("JWT_SECRET")),
 		ErrorHandler: jwtError,
 	})
 }

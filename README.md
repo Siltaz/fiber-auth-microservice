@@ -10,5 +10,5 @@
 - POST /signup - _Create new user_
 - POST /login - _Login user_
 - POST /logout - _Logout user_
-- POST /refreshToken - _Issues new JWT token_
-- POST /resetPassword - _Forgot password_
+- POST /renew-token - _Issues new access_token_
+- POST /reset-password - _Forgot password_

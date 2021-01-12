@@ -1,8 +1,8 @@
 package main
 
 import (
-	"dmb-auth-service/global"
-	"dmb-auth-service/handlers"
+	"dmb-auth-service/config"
+	"dmb-auth-service/handler"
 	"dmb-auth-service/middleware"
 	"log"
 	"strconv"
@@ -17,8 +17,8 @@ import (
 )
 
 var (
-	port    = global.Config("APP_PORT")
-	prod, _ = strconv.ParseBool(global.Config("APP_PROD"))
+	port    = config.Config("APP_PORT")
+	prod, _ = strconv.ParseBool(config.Config("APP_PROD"))
 )
 
 func main() {
@@ -45,13 +45,13 @@ func main() {
 
 	api := app.Group("/api/v1/auth")
 
-	api.Post("/signup", handlers.Signup)
-	api.Post("/login", handlers.Login)
-	api.Post("/logout", middleware.Protected(), handlers.Logout)
-	api.Post("/refreshToken", middleware.Protected(), handlers.RefreshToken)
-	api.Post("/resetPassword", handlers.ResetPassword)
+	api.Post("/signup", handler.Signup)
+	api.Post("/login", handler.Login)
+	api.Post("/logout", middleware.ProtectedRoute(), handler.Logout)
+	api.Post("/renew-token", handler.RenewToken)
+	api.Post("/reset-password", handler.ResetPassword)
 
-	app.Use(handlers.NotFound)
+	app.Use(handler.NotFound)
 
 	log.Fatal(app.Listen(":" + port))
 }
